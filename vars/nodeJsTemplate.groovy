@@ -10,6 +10,8 @@ stage('Build'){
  
     echo 'building'
     sh 'npm install'
+ def dockerfile = libraryResource 'dockerBuild.sh'
+ sh dockerfile
 
  def artifactname = libraryResource 'dockerImageName.sh'
  sh artifactname
