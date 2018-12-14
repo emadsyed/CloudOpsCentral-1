@@ -5,21 +5,15 @@ def call(Map config) {
   
 stage('Checkout'){
  checkout scm 
+  def dockerfile = libraryResource 'dockerBuild.sh'
+ sh dockerfile
 }
 stage('Build'){
  
     echo 'building'
     sh 'npm install'
- def dockerfile = libraryResource 'dockerBuild.sh'
- sh dockerfile
-
  def artifactname = libraryResource 'dockerImageName.sh'
  sh artifactname
-
- /*
- #def dockerinstall = libraryResource 'dockerBuild.sh'
- #sh dockerinstall
- */
  
 }
 stage('Test'){ 
