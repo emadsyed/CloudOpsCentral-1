@@ -11,10 +11,10 @@ stage('Build'){
     echo 'building'
     sh 'npm install'
 
- def pacakgename = libraryResource 'dockerImageName.sh'
- sh packagename
- def install = libraryResource 'dockerBuild.sh'
- sh install
+ def request = libraryResource 'dockerImageName.sh'
+ sh request
+ def request = libraryResource 'dockerBuild.sh'
+ sh request
     echo 'building'
     sh 'npm install'
  
