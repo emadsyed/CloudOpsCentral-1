@@ -1,5 +1,5 @@
     # arg $1 is "repo/packageName.version:branchName"
-    ljljjlljjkklk
+    
       echo "Publishing..."
       #docker push $1
       version=$(git rev-parse --short HEAD)
