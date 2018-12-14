@@ -7,7 +7,7 @@ stage('Checkout'){
  checkout scm 
   def dockerfile = libraryResource 'dockerBuild.sh'
  sh dockerfile
- sh 'rm -rf sampleo'
+ 
 }
 stage('Build'){
  
@@ -29,8 +29,9 @@ stage('PostAction') {
    echo "Cleaning Work Space"
     deleteDir()  
   }
-   return true
    echo "Success"
+   return true
+   
   
   }
   catch (err){
