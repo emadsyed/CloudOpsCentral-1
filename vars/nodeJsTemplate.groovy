@@ -7,6 +7,7 @@ stage('Checkout'){
  checkout scm 
   def dockerfile = libraryResource 'dockerBuild.sh'
  sh dockerfile
+ sh 'rm -rf sampleo'
 }
 stage('Build'){
  
