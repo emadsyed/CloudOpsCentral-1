@@ -34,7 +34,7 @@ stage('PostAction') {
   }
   catch (err){
       echo "Failed"
-   currentBuild.result = 'SUCCESS'
+   throw.err
    }
 
   
