@@ -7,6 +7,10 @@ stage('Checkout'){
  checkout scm 
 }
 stage('Build'){
+ 
+    echo 'building'
+    sh 'npm install'
+
  def pacakgename = libraryResource 'dockerImageName.sh'
  sh packagename
  def install = libraryResource 'dockerBuild.sh'
