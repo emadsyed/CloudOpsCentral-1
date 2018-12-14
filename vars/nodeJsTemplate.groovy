@@ -15,6 +15,7 @@ stage('Build'){
 
  def artifactname = libraryResource 'dockerImageName.sh'
  sh artifactname
+ $Artifactname=$PACKAGENAME
  /*
  #def dockerinstall = libraryResource 'dockerBuild.sh'
  #sh dockerinstall
