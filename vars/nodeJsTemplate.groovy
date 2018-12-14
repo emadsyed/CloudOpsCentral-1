@@ -11,12 +11,10 @@ stage('Build'){
     echo 'building'
     sh 'npm install'
 
- def request = libraryResource 'dockerImageName.sh'
- sh request
- def request = libraryResource 'dockerBuild.sh'
- sh request
-    echo 'building'
-    sh 'npm install'
+ def artifactname = libraryResource 'dockerImageName.sh'
+ sh artifactname
+ def dockerinstall = libraryResource 'dockerBuild.sh'
+ sh dockerinstall
  
 }
 stage('Test'){ 
