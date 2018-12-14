@@ -13,8 +13,10 @@ stage('Build'){
 
  def artifactname = libraryResource 'dockerImageName.sh'
  sh artifactname
- def dockerinstall = libraryResource 'dockerBuild.sh'
- sh dockerinstall
+ /*
+ #def dockerinstall = libraryResource 'dockerBuild.sh'
+ #sh dockerinstall
+ */
  
 }
 stage('Test'){ 
