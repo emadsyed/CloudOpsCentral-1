@@ -1,12 +1,13 @@
 def call(Map config) {
 
  node ('master'){
+  deleteDir()
   try{
   
 stage('Checkout'){
- checkout scm 
-  def dockerfile = libraryResource 'dockerfilepull.sh'
- sh dockerfile
+ checkout scm  // In this Step Jenkins will get the Git Url and Branch name from the job.
+  def dockerfile = libraryResource 'dockerfilepull.sh' // Reading Docker function to Copy Docker file.
+ sh dockerfile . 
  
 }
 stage('Build'){
