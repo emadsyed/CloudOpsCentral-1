@@ -45,8 +45,8 @@ stage('PostAction') {
    echo "Cleaning WorkSpace"
    deleteDir()
     echo "Sending Email"
-    emailext body: ""HELLO,
-        Email test"", subject: 'Testing Email', to: 'emad.syed@careebuilder.com'
+    emailext body: ""HELLO Sam Email test"", 
+        subject: 'Testing Email', to: 'emad.syed@careebuilder.com'
     
   }
    echo "Success"
