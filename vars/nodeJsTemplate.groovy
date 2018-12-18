@@ -1,4 +1,4 @@
-def command = '''
+/*def command = '''
  version=$(git rev-parse --short HEAD)
  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
  PACKAGENAME=${PNAME%.*}
@@ -8,7 +8,7 @@ def command = '''
     // proc.waitFor()
       // println proc.text
 
-
+*/
 def call(Map config) {
  
  node ('master'){
