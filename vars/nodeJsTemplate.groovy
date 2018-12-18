@@ -16,9 +16,12 @@ stage('Checkout'){
  checkout scm 
  // def dockerfile = libraryResource 'dockerBuild.sh'
 // sh dockerfile
+ echo 'runnning def'
 def proc = ['bash', '-c', PACKAGENAME].execute()
 proc.waitFor()
 println proc.text
+ 
+ echo 'end def'
  
 
  
