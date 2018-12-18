@@ -8,7 +8,7 @@ def proc = ['bash', '-c', PACKAGENAME].execute()
 //proc.waitFor()
 //println proc.text
 
-def call(Map config(PACKAGENAME)) {
+def call(Map config, PACKAGENAME) {
  node ('master'){
   try{
   
