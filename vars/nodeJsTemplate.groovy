@@ -9,7 +9,7 @@ stage('Checkout'){
   //def dockerfile = libraryResource 'dockerfilepull.sh' // Reading Docker function to Copy Docker file.
  //sh  dockerfile  
  def dockerfile = readfile libraryResource 'DOCKERFILE'
- def DOCKERFILE = new file './'
+ def DOCKERFILE = new file 
  DOCKERFILE << dockerfile.txt
  
 }
