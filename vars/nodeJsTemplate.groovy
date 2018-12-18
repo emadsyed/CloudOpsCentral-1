@@ -1,6 +1,6 @@
-
-
+/*
     def PACKAGENAME = '''
+
        version=$(git rev-parse --short HEAD)
        PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
        PACKAGENAME=${PNAME%.*}
@@ -12,6 +12,20 @@
     println proc.text
        
      
+def Version = sh ' git rev-parse --short HEAD)'
+Version()
+   */
+def getLatestBuildDetails(context){
+    //...
+    executeCommand(context, 'git rev-parse --short HEAD')
+    //...
+}
+
+def executeCommand(context, String command) {
+    stdout = script.sh(script: command, returnStdout: true)
+    return stdout.trim()
+}
+
 
 def call(Map config) {
  
@@ -23,9 +37,9 @@ def call(Map config) {
       }
 
 stage('Build'){
- 
+    getLatestBuildDetails(this)  
     echo 'building'
-    println proc.text
+    
 // executeShellCommand(command)
    
     sh 'npm install'
