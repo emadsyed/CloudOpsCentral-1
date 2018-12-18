@@ -1,15 +1,4 @@
 
-def PACKAGENAME () {
-    '''
-
-       version=$(git rev-parse --short HEAD)
-       PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
-       PACKAGENAME=${PNAME%.*}
-       echo $PACKAGENAME
-                  '''
-    return true
-}
-
    //    def proc = ['bash', '-c', PACKAGENAME].execute()
     //   proc.waitFor()
     //println proc.text
