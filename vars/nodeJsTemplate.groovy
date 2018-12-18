@@ -29,7 +29,7 @@ def call(Map config) {
 stage('Build'){
 
     echo 'building'
-    def z = version.vshort()
+    def z = vshort.version()
     z.executeCommand(this)
     
 // executeShellCommand(command)
