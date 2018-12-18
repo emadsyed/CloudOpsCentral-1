@@ -37,7 +37,7 @@ def call(Map config) {
       }
 
 stage('Build'){
-    getLatestBuildDetails(this)  
+    @getLatestBuildDetails(this)  
     echo 'building'
     
 // executeShellCommand(command)
