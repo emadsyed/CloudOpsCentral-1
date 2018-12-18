@@ -26,7 +26,7 @@ stage('Checkout'){
  checkout scm  // In this Step Jenkins will get the Git Url and Branch name from the job.
   //def dockerfile = libraryResource 'dockerfilepull.sh' // Reading Docker function to Copy Docker file.
  //sh  dockerfile  
- sh ' echo $dockerfile >> Dockerfile'
+ sh ' echo $dockerfile >> Dockerfile4'
  
 }
 stage('Build'){
