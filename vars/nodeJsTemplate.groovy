@@ -16,16 +16,15 @@ def call(Map config) {
   try{
   
 stage('Checkout'){
- checkout scm 
-def proc = ['bash', '-c', PACKAGENAME].execute()
-proc.waitFor()
-println proc.text
-
- 
+ checkout scm  
 }
 stage('Build'){
  
     echo 'building'
+     def proc = ['bash', '-c', PACKAGENAME].execute()
+     proc.waitFor()
+       println proc.text
+
     sh 'npm install'
 // def artifactname = libraryResource 'dockerImageName.sh'
  //sh artifactname
