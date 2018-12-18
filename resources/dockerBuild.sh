@@ -1,2 +1,5 @@
-echo "Generating Docker File in WorkSpace"
-curl https://raw.githubusercontent.com/adilforms/Shared-tempalte/test/Dockerfile > Dockerfile
+sh '''#!/bin/bash -el
+      # arg $1 is "repo/packageName.version:branchName"
+      echo "Building image..."
+      docker build -t $1 .
+   '''
