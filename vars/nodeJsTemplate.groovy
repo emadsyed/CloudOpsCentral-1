@@ -3,23 +3,11 @@ import groovy.json.*
  
 def dockerfile = readfile libraryResource 'DOCKERFILE'
 def version = string "git rev-parse --short HEAD"
-def commitIncludes(regex) {
-    try {
-        sh  """#!/bin/bash -l
-            git diff-tree --no-commit-id --name-only -r HEAD^..HEAD | grep -E '${regex}'
-        """
-
-        return true
-    } catch (e) {
-        return false
-    }
-}
-
 
 def call(Map config) {
 
  node ('master'){
-  deleteDir()
+  //deleteDir()
   try{
   
 stage('Checkout'){
