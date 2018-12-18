@@ -30,8 +30,8 @@ stage('Test'){
  }
  
 stage('Publish') { 
-def request = libraryResource 'dockerPush.sh'
- sh request
+//def request = libraryResource 'dockerPush.sh'
+ //sh request
  }
 stage('PostAction') {
  echo "Email"
