@@ -1,38 +1,18 @@
-
-   //    def proc = ['bash', '-c', PACKAGENAME].execute()
-    //   proc.waitFor()
-    //println proc.text
-       
-     
-//def Version = sh ' git rev-parse --short HEAD)'
-//Version()
-
-
-
-
 def call(Map config) {
- 
+
  node ('master'){
-
-   deleteDir()
   try{
-         
- stage('Checkout'){
- checkout scm  
-   
-      }
-
+  
+stage('Checkout'){
+ checkout scm 
+}
 stage('Build'){
-
+ def pacakgename = libraryResource 'dockerImageName.sh'
+ sh packagename
+ def install = libraryResource 'dockerBuild.sh'
+ sh install
     echo 'building'
-   
-    
-// executeShellCommand(command)
-   
     sh 'npm install'
-// def artifactname = libraryResource 'dockerImageName.sh'
- //sh artifactname
-
  
 }
 stage('Test'){ 
@@ -41,28 +21,23 @@ stage('Test'){
  
 stage('Publish') { 
 def request = libraryResource 'dockerPush.sh'
-  
  sh request
  }
 stage('PostAction') {
-       echo "Sending Email"
-
-    
+   echo "Cleaning Work Space"
+    deleteDir()  
   }
-   echo "Success"
    return true
-   
+   echo "Success"
   
   }
   catch (err){
       echo "Failed"
-    currentBuild.result = 'FAILED'
-   throw err
+   return false
    }
 
   
   
 }
  }
-
 
