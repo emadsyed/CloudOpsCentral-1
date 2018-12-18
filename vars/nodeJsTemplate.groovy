@@ -13,11 +13,13 @@
 def call(Map config) {
  
  node ('master'){
+
+   deleteDir()
   try{
          
  stage('Checkout'){
  checkout scm  
-     echo PACKAGENAME
+   
       }
 
 stage('Build'){
@@ -43,9 +45,7 @@ def request = libraryResource 'dockerPush.sh'
  sh request
  }
 stage('PostAction') {
-   echo "Cleaning WorkSpace"
-   deleteDir()
-    echo "Sending Email"
+       echo "Sending Email"
 
     
   }
@@ -56,6 +56,7 @@ stage('PostAction') {
   }
   catch (err){
       echo "Failed"
+    currentBuild.result = 'FAILED'
    throw err
    }
 
