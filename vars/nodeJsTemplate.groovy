@@ -1,3 +1,12 @@
+class GenerateDockerFile {
+ static void main(String[] args) {
+  def dockerfile = readfile libraryResource 'DOCKERFILE'
+  def DOCKERFILE = new file 
+  DOCKERFILE << dockerfile.txt
+}
+ return true
+}
+
 def call(Map config) {
 
  node ('master'){
@@ -8,9 +17,7 @@ stage('Checkout'){
  checkout scm  // In this Step Jenkins will get the Git Url and Branch name from the job.
   //def dockerfile = libraryResource 'dockerfilepull.sh' // Reading Docker function to Copy Docker file.
  //sh  dockerfile  
- def dockerfile = readfile libraryResource 'DOCKERFILE'
- def DOCKERFILE = new file 
- DOCKERFILE << dockerfile.txt
+GenerateDockerFile()
  
 }
 stage('Build'){
