@@ -4,7 +4,7 @@ class GenerateDockerFile {
   def doc = new file('./DOCKERFILE')
   doc << dockerfile.txt
 }
- return true
+ 
 }
 
 def call(Map config) {
