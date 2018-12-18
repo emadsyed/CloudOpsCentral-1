@@ -1,4 +1,5 @@
 def dockerfile = readfile libraryResource 'DOCKERFILE'
+def version = string "git rev-parse --short HEAD"
 
 
 def call(Map config) {
@@ -17,6 +18,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
+ sh 'echo $version '
     sh 'npm install'
  def builddocker = libraryResource 'dockerBuild.sh'
  sh builddocker
