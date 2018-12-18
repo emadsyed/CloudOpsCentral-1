@@ -9,7 +9,7 @@
 
        def proc = ['bash', '-c', PACKAGENAME].execute()
        proc.waitFor()
-    return proc.text
+    println proc.text
        
      
 
@@ -25,6 +25,7 @@ def call(Map config) {
 stage('Build'){
  
     echo 'building'
+    println proc.text
 // executeShellCommand(command)
    
     sh 'npm install'
