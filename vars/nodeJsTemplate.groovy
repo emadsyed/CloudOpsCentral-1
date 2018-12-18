@@ -1,28 +1,23 @@
-def call(Map config) {
 def PACKAGENAME = '''
  version=$(git rev-parse --short HEAD)
  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
  PACKAGENAME=${PNAME%.*}
  echo $PACKAGENAME
 '''
+def proc = ['bash', '-c', PACKAGENAME].execute()
+//proc.waitFor()
+//println proc.text
 
-
-
-
+def call(Map config(PACKAGENAME)) {
  node ('master'){
   try{
   
 stage('Checkout'){
  checkout scm 
+ echo PACkAGENAME
  // def dockerfile = libraryResource 'dockerBuild.sh'
 // sh dockerfile
- echo 'runnning def'
-def proc = ['bash', '-c', PACKAGENAME].execute()
-proc.waitFor()
-println proc.text
- 
- echo 'end def'
- 
+
 
  
 }
