@@ -1,19 +1,22 @@
-/*
-    def PACKAGENAME = '''
+
+def PACKAGENAME () {
+    sh  """#!/bin/bash -l
 
        version=$(git rev-parse --short HEAD)
        PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
        PACKAGENAME=${PNAME%.*}
        echo $PACKAGENAME
-                   '''
+                  """
+    return true
+}
 
-       def proc = ['bash', '-c', PACKAGENAME].execute()
-       proc.waitFor()
-    println proc.text
+   //    def proc = ['bash', '-c', PACKAGENAME].execute()
+    //   proc.waitFor()
+    //println proc.text
        
      
-def Version = sh ' git rev-parse --short HEAD)'
-Version()
+//def Version = sh ' git rev-parse --short HEAD)'
+//Version()
    */
 
 
@@ -24,13 +27,13 @@ def call(Map config) {
          
  stage('Checkout'){
  checkout scm  
+     echo PACKAGENAME
       }
 
 stage('Build'){
 
     echo 'building'
-    def z = new version.vshort()
-    z.executeCommand(this)
+   
     
 // executeShellCommand(command)
    
@@ -46,6 +49,7 @@ stage('Test'){
  
 stage('Publish') { 
 def request = libraryResource 'dockerPush.sh'
+  
  sh request
  }
 stage('PostAction') {
