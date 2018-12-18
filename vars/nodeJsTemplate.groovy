@@ -22,8 +22,8 @@ stage('Build'){
     echo 'building'
  sh ' echo $version'
     sh 'npm install'
-// def builddocker = libraryResource 'dockerBuild.sh'
- //sh builddocker
+def builddocker = libraryResource 'dockerBuild.sh'
+ sh builddocker
  
  
 }
@@ -32,13 +32,13 @@ stage('Test'){
  }
  
 stage('Publish') { 
-//def request = libraryResource 'dockerPush.sh'
- //sh request
+def request = libraryResource 'dockerPush.sh'
+ sh request
  }
 stage('PostAction') {
  echo "Email"
    //echo "Cleaning WorkSpace"
-   // deleteDir()  
+   deleteDir()  
   }
    echo "Success"
    return true
