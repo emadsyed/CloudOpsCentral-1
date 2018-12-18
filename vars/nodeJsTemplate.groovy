@@ -32,8 +32,9 @@ def request = libraryResource 'dockerPush.sh'
  sh request
  }
 stage('PostAction') {
-   echo "Cleaning WorkSpace"
-    deleteDir()  
+ echo "Email"
+   //echo "Cleaning WorkSpace"
+   // deleteDir()  
   }
    echo "Success"
    return true
