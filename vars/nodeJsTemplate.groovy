@@ -1,12 +1,12 @@
-def PACKAGENAME = '''
+def command = '''
  version=$(git rev-parse --short HEAD)
  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
  PACKAGENAME=${PNAME%.*}
  echo $PACKAGENAME
 '''
- def proc = ['bash', '-c', PACKAGENAME].execute()
-     proc.waitFor()
-       println proc.text
+ //def proc = ['bash', '-c', PACKAGENAME].execute()
+    // proc.waitFor()
+      // println proc.text
 
 
 def call(Map config) {
@@ -20,7 +20,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
- proc.txt call
+ executeShellCommand(command)
    
     sh 'npm install'
 // def artifactname = libraryResource 'dockerImageName.sh'
