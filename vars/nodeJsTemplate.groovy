@@ -1,9 +1,6 @@
 
-def call(Map config) {
- 
- node ('master'){
-  try{
-       def PACKAGENAME = '''
+/*
+    def PACKAGENAME = '''
        version=$(git rev-parse --short HEAD)
        PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
        PACKAGENAME=${PNAME%.*}
@@ -12,7 +9,14 @@ def call(Map config) {
        def proc = ['bash', '-c', PACKAGENAME].execute()
        proc.waitFor()
        println proc.text
-   
+       
+       */
+
+def call(Map config) {
+ 
+ node ('master'){
+  try{
+         
  stage('Checkout'){
  checkout scm  
       }
@@ -38,7 +42,9 @@ def request = libraryResource 'dockerPush.sh'
  }
 stage('PostAction') {
    echo "Cleaning WorkSpace"
-    deleteDir()  
+
+
+deleteDir()  
   }
    echo "Success"
    return true
