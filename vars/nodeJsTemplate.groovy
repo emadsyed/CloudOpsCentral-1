@@ -33,6 +33,7 @@ stage('PostAction') {
   }
   catch (err){
       echo "Failed"
+   throw err
    return false
    }
 
