@@ -1,14 +1,15 @@
 
-/*
+
     def PACKAGENAME = '''
        version=$(git rev-parse --short HEAD)
        PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
        PACKAGENAME=${PNAME%.*}
        echo $PACKAGENAME
                    '''
+
        def proc = ['bash', '-c', PACKAGENAME].execute()
        proc.waitFor()
-       println proc.text
+    return proc.text
        
        */
 
@@ -42,9 +43,11 @@ def request = libraryResource 'dockerPush.sh'
  }
 stage('PostAction') {
    echo "Cleaning WorkSpace"
-
-
-deleteDir()  
+   deleteDir()
+    echo "Sending Email'
+    emailext body: ""HELLO,
+        Email test"", subject: 'Testing Email', to: 'emad.syed@careebuilder.com'
+    
   }
    echo "Success"
    return true
