@@ -20,7 +20,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
- echo proc.txt
+ proc.txt call
    
     sh 'npm install'
 // def artifactname = libraryResource 'dockerImageName.sh'
