@@ -1,8 +1,8 @@
 class GenerateDockerFile {
  static void main(String[] args) {
   def dockerfile = readfile libraryResource 'DOCKERFILE'
-  def DOCKERFILE = new file 
-  DOCKERFILE << dockerfile.txt
+  def doc = new file('./DOCKERFILE)
+  doc << dockerfile.txt
 }
  return true
 }
