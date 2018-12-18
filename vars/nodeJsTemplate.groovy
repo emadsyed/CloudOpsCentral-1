@@ -44,7 +44,7 @@ def request = libraryResource 'dockerPush.sh'
 stage('PostAction') {
    echo "Cleaning WorkSpace"
    deleteDir()
-    echo "Sending Email'
+    echo "Sending Email"
     emailext body: ""HELLO,
         Email test"", subject: 'Testing Email', to: 'emad.syed@careebuilder.com'
     
