@@ -1,17 +1,11 @@
-def command() {
-    try {
-        sh """#!/bin/bash -l
-          version=$(git rev-parse --short HEAD)
-          PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
-          PACKAGENAME=${PNAME%.*}
-          echo $PACKAGENAME.$version
-        """
 
-        return true
-    } catch (e) {
-        return false
-    }
-}
+def PACKAGENAME = '''
+ version=$(git rev-parse --short HEAD)
+ PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
+ PACKAGENAME=${PNAME%.*}
+ echo $PACKAGENAME
+'''
+
 
 def call(Map config) {
 
@@ -20,8 +14,12 @@ def call(Map config) {
   
 stage('Checkout'){
  checkout scm 
-  def dockerfile = libraryResource 'dockerBuild.sh'
- sh dockerfile
+ // def dockerfile = libraryResource 'dockerBuild.sh'
+// sh dockerfile
+    def proco = ['bash', '-c', proc].execute()
+    proco.waitFor()
+    println proco.text
+
  
 }
 stage('Build'){
