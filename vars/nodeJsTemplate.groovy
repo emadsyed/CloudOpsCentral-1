@@ -5,14 +5,16 @@ def call(Map config) {
   
 stage('Checkout'){
  checkout scm 
+  def dockerfile = libraryResource 'dockerfilepull.sh'
+ sh dockerfile
+ 
 }
 stage('Build'){
- def packagename = libraryResource 'dockerImageName.sh'
- sh packagename
- def install = libraryResource 'dockerBuild.sh'
- sh install
+ 
     echo 'building'
     sh 'npm install'
+ def artifactname = libraryResource 'dockerBuild.sh'
+ sh artifactname
  
 }
 stage('Test'){ 
@@ -24,17 +26,17 @@ def request = libraryResource 'dockerPush.sh'
  sh request
  }
 stage('PostAction') {
-   echo "Cleaning Work Space"
+   echo "Cleaning WorkSpace"
     deleteDir()  
   }
-   return true
    echo "Success"
+   return true
+   
   
   }
   catch (err){
       echo "Failed"
    throw err
-   return false
    }
 
   
