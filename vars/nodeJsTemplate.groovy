@@ -7,7 +7,7 @@ stage('Checkout'){
  checkout scm 
 }
 stage('Build'){
- def pacakgename = libraryResource 'dockerImageName.sh'
+ def packagename = libraryResource 'dockerImageName.sh'
  sh packagename
  def install = libraryResource 'dockerBuild.sh'
  sh install
