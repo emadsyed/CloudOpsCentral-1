@@ -32,7 +32,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
- sh version
+ sh $version
     sh 'npm install'
  def builddocker = libraryResource 'dockerBuild.sh'
  sh builddocker
