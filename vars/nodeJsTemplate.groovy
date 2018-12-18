@@ -3,7 +3,7 @@ def call(Map config) {
  
  node ('master'){
   try{
-       def command = '''
+       def PACKAGENAME = '''
        version=$(git rev-parse --short HEAD)
        PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
        PACKAGENAME=${PNAME%.*}
