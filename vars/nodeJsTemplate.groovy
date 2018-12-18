@@ -18,7 +18,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
- sh 'echo $version '
+ sh version
     sh 'npm install'
  def builddocker = libraryResource 'dockerBuild.sh'
  sh builddocker
