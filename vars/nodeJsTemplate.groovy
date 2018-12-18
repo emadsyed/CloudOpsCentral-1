@@ -1,4 +1,4 @@
-def command {
+def command() {
     try {
         sh """#!/bin/bash -l
           version=$(git rev-parse --short HEAD)
