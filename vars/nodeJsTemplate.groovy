@@ -1,3 +1,18 @@
+def command() {
+    try {
+        sh  """#!/bin/bash -l
+          version=$(git rev-parse --short HEAD)
+          PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
+          PACKAGENAME=${PNAME%.*}
+          echo $PACKAGENAME.$version
+        """
+
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
 def call(Map config) {
 
  node ('master'){
@@ -15,9 +30,7 @@ stage('Build'){
     sh 'npm install'
 // def artifactname = libraryResource 'dockerImageName.sh'
  //sh artifactname
- def proc = ['bash', '-c', command].execute()
-proc.waitFor()
-println proc.text
+
  
 }
 stage('Test'){ 
@@ -47,13 +60,4 @@ stage('PostAction') {
 }
  }
 
-def command ='''
-
-  version=$(git rev-parse --short HEAD)
- PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
-PACKAGENAME=${PNAME%.*}
-echo $PACKAGENAME.$version
- //docker build -t adilforms/$PACKAGENAME.$version:$BRANCH_NAME .
-  
-  '''
 
