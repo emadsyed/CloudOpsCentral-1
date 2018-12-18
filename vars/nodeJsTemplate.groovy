@@ -19,6 +19,7 @@ stage('Checkout'){
 def proc = ['bash', '-c', PACKAGENAME].execute()
 proc.waitFor()
 println proc.text
+ sh 'echo "hello world"'
 
  
 }
