@@ -2,9 +2,9 @@
 import groovy.json.*
  
 def dockerfile = readfile libraryResource 'DOCKERFILE'
-def version = sh( script: 'git rev-parse --short HEAD
+def version = sh( script: '''git rev-parse --short HEAD
                  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
-                 PACKAGENAME=${PNAME%.*}', returnStdout: true).toString().trim()
+                 PACKAGENAME=${PNAME%.*}''', returnStdout: true).toString().trim()
                  
                  echo version
                  return version
