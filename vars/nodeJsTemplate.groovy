@@ -1,8 +1,8 @@
 def dockerImageName() {
   def imageName = sh(returnStdout: true, script: """#!/bin/bash -el
       version=\$(git rev-parse --short HEAD)
-      P_Name=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
-      Package_Name=\${P_NAME%.*}
+      PName=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
+      PackageName=\${PNAME%.*}
       echo "adilforms/$Package_Name.$version:$BRANCH_NAME"
    """).trim()
 }
