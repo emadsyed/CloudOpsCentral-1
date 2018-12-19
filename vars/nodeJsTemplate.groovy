@@ -34,11 +34,13 @@ stage('Test'){
 
      
 def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
-    echo 'using new version ' +  version
+    echo  version
     return version
  }
  
 stage('Publish') { 
+ echo '----'
+ echo version
 def request = libraryResource 'dockerPush.sh'
  sh request
  }
