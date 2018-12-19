@@ -6,8 +6,8 @@ def version = sh( script: '''git rev-parse --short HEAD
                  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
                  PACKAGENAME=${PNAME%.*}''', returnStdout: true).toString().trim()
                  
-                 echo PACKAGENAME.version
-                 return PACKAGENAME.version
+                 echo 'PACKAGENAME'.'version'
+                 return 'PACKAGENAME'.'version'
 
 
 
