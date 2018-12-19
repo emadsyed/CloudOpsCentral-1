@@ -20,10 +20,10 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
- sh ' echo $version'
+executeShellCommand(version)
     sh 'npm install'
-def builddocker = libraryResource 'dockerBuild.sh'
- sh builddocker
+//def builddocker = libraryResource 'dockerBuild.sh'
+ //sh builddocker
  
  
 }
