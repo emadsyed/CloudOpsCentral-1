@@ -25,6 +25,7 @@ def dockerfile = readfile libraryResource 'DOCKERFILE'       //Loading Dockerfil
 
 
 def call(Map config) {
+  def imageName = ""
  
  node ('master'){              //Running Jenkins on Master Node
   deleteDir()                  //Clearing Workspace before Checking out new code
