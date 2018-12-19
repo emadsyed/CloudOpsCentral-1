@@ -2,11 +2,11 @@
 import groovy.json.*
  
 def dockerfile = readfile libraryResource 'DOCKERFILE'
-def version = string "$git rev-parse --short HEAD"
-//def getCommitSha(){
-  //  String[] version = sh(returnStdout: true, script: """#!/bin/bash -l
-  //      git diff-tree --no-commit-id --name-only -r HEAD^..HEAD | grep -E '${regex}'
-   // """).split("\n")
+ 
+def version = sh( script: 'git rev-parse --short HEAD > short-git-sha.tmp', returnStdout: true).toString().trim()
+    echo 'using new version ' +  version
+    return version
+
 
 def call(Map config) {
 
