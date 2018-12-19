@@ -2,7 +2,7 @@
 import groovy.json.*
  
 def dockerfile = readfile libraryResource 'DOCKERFILE'
- 
+def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
 
 
 
@@ -33,7 +33,7 @@ stage('Build'){
 stage('Test'){ 
 
      
-def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
+//def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
     echo  version
     return version
  }
