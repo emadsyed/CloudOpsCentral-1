@@ -34,8 +34,9 @@ stage('Build'){
 }
 stage('Test'){ 
 
-    echo 'version' 
- sh 'echo $version'
+     
+ sh 'Version= echo $version'
+ echo '$Version'
  }
  
 stage('Publish') { 
