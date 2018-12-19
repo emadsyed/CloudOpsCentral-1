@@ -6,8 +6,8 @@ def version = sh( script: '''git rev-parse --short HEAD
                  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
                  PACKAGENAME=${PNAME%.*}''', returnStdout: true).toString().trim()
                  
-                 echo 'PACKAGENAME'.'version'
-                 return 'PACKAGENAME'.'version'
+                // echo 'PACKAGENAME'.'version'
+                // return 'PACKAGENAME'.'version'
 
 
 
@@ -42,8 +42,8 @@ def version = sh( script: '''git rev-parse --short HEAD
                  PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
                  PACKAGENAME=${PNAME%.*}''', returnStdout: true).toString().trim()
                  
-                 echo version
-                 return version
+                 echo version.PACKAGENAME
+                 return version.PACKAGENAME
  }
  
 stage('Publish') { 
