@@ -19,6 +19,7 @@ def dockerPush(imageName) {
     echo "Publishing..."
     docker push ${imageName}
    """).trim()
+}
 def dockerfile = readfile libraryResource 'DOCKERFILE' //Loading Dockerfile into variable from resource
 
 
