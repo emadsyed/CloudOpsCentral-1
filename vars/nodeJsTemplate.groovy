@@ -22,7 +22,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
-sh 'echo $getCommitSha() '
+sh 'echo $getCommitSha'
     sh 'npm install'
 //def builddocker = libraryResource 'dockerBuild.sh'
  //sh builddocker
