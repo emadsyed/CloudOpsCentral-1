@@ -6,6 +6,7 @@ def getCommitSha(){
     String[] version = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
                //version=$(git rev-parse --short HEAD) | PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]") | PACKAGENAME=${PNAME%.*} | docker build -t adilforms/$PACKAGENAME.$version:$BRANCH_NAME .
 //)
+ return version
  
 }
 //def getCommitSha(){
