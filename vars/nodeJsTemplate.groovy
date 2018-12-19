@@ -20,26 +20,28 @@ def dockerPush(imageName) {
     docker push ${imageName}
    """).trim()
 }
-def dockerfile = readfile libraryResource 'DOCKERFILE' //Loading Dockerfile into variable from resource
+def dockerfile = readfile libraryResource 'DOCKERFILE'       //Loading Dockerfile into variable from resource
 
 
 
 def call(Map config) {
  
- node ('master'){ //Running Jenkins on Master Node
-  deleteDir() //Clearing Workspace before Checking out new code
-  try{ //Building Pipeline in try and Catch Block to catch errors
+ node ('master'){              //Running Jenkins on Master Node
+  deleteDir()                  //Clearing Workspace before Checking out new code
+  try{                         //Building Pipeline in try and Catch Block to catch errors
   
 stage('Checkout'){
- checkout scm // In this Step Jenkins will get the Git Url and Branch name from the job.
- sh ' echo $dockerfile >> Dockerfile' //Creating Dockerfile from the variable.
+ checkout scm                 // In this Step Jenkins will get the Git Url and Branch name from the job.
+ sh ' echo $dockerfile >> Dockerfile'       //Creating Dockerfile from the variable.
  
 }
 stage('Build'){
  
     echo 'building'
-    sh 'npm install' //
-       imageName = dockerImageName()
+    sh 'npm install'                    
+       
+  imageName = dockerImageName()
+  echo imageName
         dockerBuild(imageName)
  
 }
