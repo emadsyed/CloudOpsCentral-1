@@ -29,7 +29,7 @@ def call(Map config) {
  
  node ('master'){              //Running Jenkins on Master Node
   deleteDir()                  //Clearing Workspace before Checking out new code
-  try{                         //Building Pipeline in try and Catch Block to catch errors
+  //try{                         //Building Pipeline in try and Catch Block to catch errors
   
 stage('Checkout'){
  checkout scm                 // In this Step Jenkins will get the Git Url and Branch name from the job.
@@ -61,14 +61,14 @@ stage('PostAction') {
    
   }
    echo "Success"
-   return true
+   //return true
    
   
-  }
-  catch (err){
-      echo "Failed"
-   throw err //this will throw error when something Breaks
-   }
+  //}
+  //catch (err){
+    //  echo "Failed"
+   //throw err //this will throw error when something Breaks
+  // }
 
   
   
