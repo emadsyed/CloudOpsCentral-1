@@ -3,21 +3,21 @@ def dockerImageName() {
       version=\$(git rev-parse --short HEAD)
       PName=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
       PackageName=\${PNAME%.*}
-      echo "adilforms/$PackageName.$version:$BRANCH_NAME"
+      echo "$PackageName.$version:$BRANCH_NAME"
    """).trim()
 }
 
 def dockerBuild(imageName) {
   def build = sh(returnStdout: true, script: """#!/bin/bash -el
     echo "Building image..."
-    docker build -t ${imageName} .
+    docker build -t adilforms/${imageName} .
    """).trim()
 }
 
 def dockerPush(imageName) {
   def push = sh(returnStdout: true, script: """#!/bin/bash -el
     echo "Publishing..."
-    docker push ${imageName}
+    docker push adilforms/${imageName}
    """).trim()
 }
 def dockerfile = readfile libraryResource 'DOCKERFILE'       //Loading Dockerfile into variable from resource
