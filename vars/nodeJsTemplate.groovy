@@ -4,6 +4,8 @@ import groovy.json.*
 def dockerfile = readfile libraryResource 'DOCKERFILE'
 def getCommitSha(){
     return sh(returnStdout: true, script: 'git rev-parse --short HEAD')
+               //version=$(git rev-parse --short HEAD) | PNAME=$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]") | PACKAGENAME=${PNAME%.*} | docker build -t adilforms/$PACKAGENAME.$version:$BRANCH_NAME .
+//)
 }
 
 def call(Map config) {
@@ -22,7 +24,7 @@ stage('Checkout'){
 stage('Build'){
  
     echo 'building'
-sh 'echo $getCommitSha'
+sh 'version= echo $getCommitSha'
     sh 'npm install'
 //def builddocker = libraryResource 'dockerBuild.sh'
  //sh builddocker
