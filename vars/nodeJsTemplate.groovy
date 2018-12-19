@@ -1,53 +1,60 @@
+def dockerImageName() {
+  def imageName = sh(returnStdout: true, script: """#!/bin/bash -el
+      version=\$(git rev-parse --short HEAD)
+      P_Name=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
+      Package_Name=\${PNAME%.*}
+      echo "adilforms/$Package_Name.$version:$BRANCH_NAME"
+   """).trim()
+}
 
-import groovy.json.*
- 
-def dockerfile = readfile libraryResource 'DOCKERFILE'
-def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
-                 
-                // echo 'PACKAGENAME'.'version'
-                return version
+def dockerBuild(imageName) {
+  def build = sh(returnStdout: true, script: """#!/bin/bash -el
+    echo "Building image..."
+    docker build -t ${imageName} .
+   """).trim()
+}
+
+def dockerPush(imageName) {
+  def push = sh(returnStdout: true, script: """#!/bin/bash -el
+    echo "Publishing..."
+    docker push ${imageName}
+   """).trim()
+def dockerfile = readfile libraryResource 'DOCKERFILE' //Loading Dockerfile into variable from resource
 
 
 
 def call(Map config) {
-
- node ('master'){
-  //deleteDir()
-  try{
+ 
+ node ('master'){ //Running Jenkins on Master Node
+  deleteDir() //Clearing Workspace before Checking out new code
+  try{ //Building Pipeline in try and Catch Block to catch errors
   
 stage('Checkout'){
- checkout scm  // In this Step Jenkins will get the Git Url and Branch name from the job.
-  //def dockerfile = libraryResource 'dockerfilepull.sh' // Reading Docker function to Copy Docker file.
- //sh  dockerfile  
- sh ' echo $dockerfile >> Dockerfile'
+ checkout scm // In this Step Jenkins will get the Git Url and Branch name from the job.
+ sh ' echo $dockerfile >> Dockerfile' //Creating Dockerfile from the variable.
  
 }
 stage('Build'){
  
     echo 'building'
-
- 
-    sh 'npm install'
-//def builddocker = libraryResource 'dockerBuild.sh'
- //sh builddocker
- 
+    sh 'npm install' //
+       imageName = dockerImageName()
+        dockerBuild(imageName)
  
 }
 stage('Test'){ 
-
-     
- echo ${version}
+    echo 'version' //Executing Test 
  }
  
 stage('Publish') { 
- echo '----'
-def request = libraryResource 'dockerPush.sh'
- sh request
+//def request = libraryResource 'dockerPush.sh' // In this step we are loading docker push function,
+ //sh request //which will publish Docker Image to DockerHub
+       def request = dockerPush(imageName)
+        sh request
  }
 stage('PostAction') {
- echo "Email"
-   //echo "Cleaning WorkSpace"
-   deleteDir()  
+   echo "Email" //Sending Email after Build
+   
   }
    echo "Success"
    return true
@@ -56,7 +63,7 @@ stage('PostAction') {
   }
   catch (err){
       echo "Failed"
-   throw err
+   throw err //this will throw error when something Breaks
    }
 
   
