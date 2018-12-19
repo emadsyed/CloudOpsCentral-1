@@ -34,13 +34,13 @@ stage('Test'){
 
      
 //def version = sh( script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
-    echo  version
+    echo  $version
     return version
  }
  
 stage('Publish') { 
  echo '----'
- echo version
+ echo $version
 def request = libraryResource 'dockerPush.sh'
  sh request
  }
