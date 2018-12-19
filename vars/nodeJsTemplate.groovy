@@ -4,7 +4,7 @@ def dockerImageName() {
       PName=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
       PackageName=\${PNAME%.*}
       echo "$PackageName.$version:$BRANCH_NAME"
-   """).trim().execute()
+   """).trim()
 }
 
 def dockerBuild(imageName) {
