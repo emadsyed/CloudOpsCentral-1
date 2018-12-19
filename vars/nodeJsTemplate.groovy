@@ -38,7 +38,7 @@ stage('Build'){
  
 }
 stage('Test'){ 
- version: getCommitSha()
+ sh 'version = echo getCommitSha()'
     echo '$version' 
  }
  
