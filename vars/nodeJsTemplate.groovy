@@ -3,7 +3,7 @@ def dockerImageName() {
       version=\$(git rev-parse --short HEAD)
       PName=\$(echo $JOB_NAME | tr / . | tr "[:upper:]" "[:lower:]")
       PackageName=\${PNAME%.*}
-      echo "$PackageName.$version:$BRANCH_NAME"
+      echo "\$PackageName.\$version:\$BRANCH_NAME"
    """).trim()
 }
 
